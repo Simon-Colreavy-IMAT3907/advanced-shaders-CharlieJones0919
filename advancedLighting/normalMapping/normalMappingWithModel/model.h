@@ -42,7 +42,7 @@ public:
 				<< importer.GetErrorString() << std::endl;
 			return false;
 		}
-		this->modelFileDir = filePath.substr(0, filePath.find_last_of('/'));
+		this->modelFileDir = filePath.substr(0, filePath.find_last_of('/')); 
 		if (!this->processNode(sceneObjPtr->mRootNode, sceneObjPtr))
 		{
 			std::cerr << "Error:Model::loadModel, process node failed."<< std::endl;

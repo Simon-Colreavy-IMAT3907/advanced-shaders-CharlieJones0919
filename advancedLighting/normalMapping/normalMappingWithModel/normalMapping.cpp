@@ -29,9 +29,6 @@ void mouse_move_callback(GLFWwindow* window, double xpos, double ypos);
 // 鼠标滚轮回调函数原型声明
 void mouse_scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 
-// 场景中移动
-void do_movement();
-
 // 定义程序常量
 const int WINDOW_WIDTH = 800, WINDOW_HEIGHT = 600;
 // 用于相机交互参数
@@ -78,6 +75,7 @@ int main(int argc, char** argv)
 	glfwSetKeyCallback(window, key_callback);
 	// 注册鼠标事件回调函数
 	glfwSetCursorPosCallback(window, mouse_move_callback);
+
 	// 注册鼠标滚轮事件回调函数
 	glfwSetScrollCallback(window, mouse_scroll_callback);
 	// 鼠标捕获 停留在程序内
@@ -131,7 +129,6 @@ int main(int argc, char** argv)
 		deltaTime = currentFrame - lastFrame;
 		lastFrame = currentFrame;
 		glfwPollEvents(); // 处理例如鼠标 键盘等事件
-		do_movement(); // 根据用户操作情况 更新相机属性
 
 		// 清除颜色缓冲区 重置为指定颜色
 		glClearColor(0.18f, 0.04f, 0.14f, 1.0f);
@@ -173,8 +170,6 @@ int main(int argc, char** argv)
 		// 绘制模型
 		objModel.draw(shader);
 
-		std::cout << "using normal mapping " << (bNormalMapping ? "true" : "false") << std::endl;
-
 		glBindVertexArray(0);
 		glUseProgram(0);
 		glfwSwapBuffers(window); // 交换缓存
@@ -185,20 +180,41 @@ int main(int argc, char** argv)
 }
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
-	if (key >= 0 && key < 1024)
+	switch (action)
 	{
-		if (action == GLFW_PRESS)
-			keyPressedStatus[key] = true;
-		else if (action == GLFW_RELEASE)
-			keyPressedStatus[key] = false;
+	case(GLFW_PRESS):
+		switch (key)
+		{
+		case(GLFW_KEY_ESCAPE):
+			glfwSetWindowShouldClose(window, GL_TRUE);
+			break;
+
+		case(GLFW_KEY_N):
+			bNormalMapping = !bNormalMapping;
+			std::cout << "using normal mapping " << (bNormalMapping ? "true" : "false") << std::endl;
+			break;
+		}
+		break;
+	case(GLFW_RELEASE):
+		
+		break;
 	}
-	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+
+	//Check for movement keys.
+	switch (key)
 	{
-		glfwSetWindowShouldClose(window, GL_TRUE); // 关闭窗口
-	}
-	if (key == GLFW_KEY_N && action == GLFW_PRESS)
-	{
-		bNormalMapping = !bNormalMapping;
+	case(GLFW_KEY_W):
+		camera.handleKeyPress(FORWARD, deltaTime);
+		break;
+	case(GLFW_KEY_A):
+		camera.handleKeyPress(LEFT, deltaTime);
+		break;
+	case(GLFW_KEY_S):
+		camera.handleKeyPress(BACKWARD, deltaTime);
+		break;
+	case(GLFW_KEY_D):
+		camera.handleKeyPress(RIGHT, deltaTime);
+		break;
 	}
 }
 void mouse_move_callback(GLFWwindow* window, double xpos, double ypos)
@@ -222,16 +238,4 @@ void mouse_move_callback(GLFWwindow* window, double xpos, double ypos)
 void mouse_scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 {
 	camera.handleMouseScroll(yoffset);
-}
-// 由相机辅助类处理键盘控制
-void do_movement()
-{
-	if (keyPressedStatus[GLFW_KEY_W])
-		camera.handleKeyPress(FORWARD, deltaTime);
-	if (keyPressedStatus[GLFW_KEY_S])
-		camera.handleKeyPress(BACKWARD, deltaTime);
-	if (keyPressedStatus[GLFW_KEY_A])
-		camera.handleKeyPress(LEFT, deltaTime);
-	if (keyPressedStatus[GLFW_KEY_D])
-		camera.handleKeyPress(RIGHT, deltaTime);
 }
