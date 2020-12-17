@@ -34,10 +34,11 @@ const int WINDOW_WIDTH = 800, WINDOW_HEIGHT = 600;
 // 用于相机交互参数
 GLfloat lastX = WINDOW_WIDTH / 2.0f, lastY = WINDOW_HEIGHT / 2.0f;
 bool firstMouseMove = true;
+bool shiftKeyDown = false;
 bool keyPressedStatus[1024]; // 按键情况记录
 GLfloat deltaTime = 0.0f; // 当前帧和上一帧的时间差
 GLfloat lastFrame = 0.0f; // 上一帧时间
-Camera camera(glm::vec3(0.0f, 1.8f, 4.0f));
+Camera camera = Camera();
 glm::vec3 lampPos(0.5f, 1.5f, 0.8f);
 bool bNormalMapping = true;
 Model objModel;
@@ -134,8 +135,7 @@ int main(int argc, char** argv)
 		glClearColor(0.18f, 0.04f, 0.14f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		glm::mat4 projection = glm::perspective(camera.mouse_zoom,
-			(GLfloat)(WINDOW_WIDTH) / WINDOW_HEIGHT, 1.0f, 100.0f); // 投影矩阵
+		glm::mat4 projection = glm::perspective(glm::radians(camera.getZoom()), (GLfloat)(WINDOW_WIDTH / WINDOW_HEIGHT), 1.0f, 100.0f);
 		glm::mat4 view = camera.getViewMatrix(); // 视变换矩阵
 
 		// 这里填写场景绘制代码
@@ -152,7 +152,7 @@ int main(int argc, char** argv)
 		glUniform3f(lightPosLoc, lampPos.x, lampPos.y, lampPos.z);
 		// 设置观察者位置
 		GLint viewPosLoc = glGetUniformLocation(shader.programId, "viewPos");
-		glUniform3f(viewPosLoc, camera.position.x, camera.position.y, camera.position.z);
+		glUniform3f(viewPosLoc, camera.getPosition().x, camera.getPosition().y, camera.getPosition().z);
 		// 设置光源位置 用于顶点着色器计算
 		lightPosLoc = glGetUniformLocation(shader.programId, "lightPos");
 		glUniform3f(lightPosLoc, lampPos.x, lampPos.y, lampPos.z);
@@ -185,6 +185,10 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 	case(GLFW_PRESS):
 		switch (key)
 		{
+		case(GLFW_KEY_LEFT_SHIFT):
+			shiftKeyDown = true;
+			break;
+
 		case(GLFW_KEY_ESCAPE):
 			glfwSetWindowShouldClose(window, GL_TRUE);
 			break;
@@ -193,10 +197,19 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 			bNormalMapping = !bNormalMapping;
 			std::cout << "using normal mapping " << (bNormalMapping ? "true" : "false") << std::endl;
 			break;
+
+		case(GLFW_KEY_R):
+			camera.reset();
+			break;
 		}
 		break;
 	case(GLFW_RELEASE):
-		
+		switch (key)
+		{
+		case(GLFW_KEY_LEFT_SHIFT):
+			shiftKeyDown = false;
+			break;
+		}
 		break;
 	}
 
@@ -204,14 +217,18 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 	switch (key)
 	{
 	case(GLFW_KEY_W):
-		camera.handleKeyPress(FORWARD, deltaTime);
-		break;
+		switch (shiftKeyDown) {
+			case(false): camera.handleKeyPress(UP, deltaTime); break;
+			case(true): camera.handleKeyPress(FORWARD, deltaTime); break;
+		} break;
 	case(GLFW_KEY_A):
 		camera.handleKeyPress(LEFT, deltaTime);
 		break;
 	case(GLFW_KEY_S):
-		camera.handleKeyPress(BACKWARD, deltaTime);
-		break;
+		switch (shiftKeyDown) {
+			case(false): camera.handleKeyPress(DOWN, deltaTime); break;
+			case(true): camera.handleKeyPress(BACKWARD, deltaTime); break;
+		} break;
 	case(GLFW_KEY_D):
 		camera.handleKeyPress(RIGHT, deltaTime);
 		break;

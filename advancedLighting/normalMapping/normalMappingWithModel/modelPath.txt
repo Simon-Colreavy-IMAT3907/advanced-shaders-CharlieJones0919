@@ -1,1 +1,1 @@
-../../resources/models/Rudd_Fish/Rudd.obj
+../../resources/models/Cyborg/Cyborg.obj
