@@ -27,6 +27,7 @@ struct Vertex
 	glm::vec2 texCoords;
 	glm::vec3 normal;
 	glm::vec3 tangent;
+	glm::vec3 bitangent;
 };
 
 /**
@@ -80,6 +81,10 @@ private:
 		//Vertex tangent vectors.
 		glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)(8 * sizeof(GL_FLOAT)));
 		glEnableVertexAttribArray(3);
+
+		//Vertex bitangent vectors.
+		glVertexAttribPointer(4, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)(8 * sizeof(GL_FLOAT)));
+		glEnableVertexAttribArray(4);
 		
 		//Indicies data.
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->EBOId);
@@ -90,9 +95,9 @@ private:
 public:
 	//! A constructor for creating a mesh.
 	/**
-	\params vertData Mesh vertices.
-	\params textures Textures to set to the mesh.
-	\params indices Mesh indices.
+	\param vertData Mesh vertices.
+	\param textures Textures to set to the mesh.
+	\param indices Mesh indices.
 	*/
 	Mesh(const std::vector<Vertex>& vertData, const std::vector<Texture> & textures, const std::vector<GLuint>& indices) :VAOId(0), VBOId(0), EBOId(0)
 	{
@@ -106,9 +111,9 @@ public:
 
 	//! Function to set the data of an existing mesh.
 	/**
-	\params vertData Mesh vertices.
-	\params textures Textures to set to the mesh.
-	\params indices Mesh indices.
+	\param vertData Mesh vertices.
+	\param textures Textures to set to the mesh.
+	\param indices Mesh indices.
 	*/
 	void setData(const std::vector<Vertex>& vertData, const std::vector<Texture> & textures, const std::vector<GLuint>& indices)
 	{
@@ -199,15 +204,6 @@ public:
 					glUniform1i(glGetUniformLocation(shader.programId, samplerNameStr.str().c_str()), texUnitCnt++);
 				}
 				break;
-				/*case aiTextureType_HEIGHT:
-				{
-					glActiveTexture(GL_TEXTURE0 + texUnitCnt);
-					glBindTexture(GL_TEXTURE_2D, it->id);
-					std::stringstream samplerNameStr;
-					samplerNameStr << "texture_height" << normalCnt++;
-					glUniform1i(glGetUniformLocation(shader.programId, samplerNameStr.str().c_str()), texUnitCnt++);
-				}
-				break;*/
 			default:
 				std::cerr << "Warning::Mesh::draw, texture type" << it->type
 					<< " current not supported." << std::endl;

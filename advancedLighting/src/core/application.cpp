@@ -1,5 +1,25 @@
 /**
 \file application.h
+\mainpage Shaders Assignment Doxygen Report - P2423910  
+*<EM> This program is an attempt to implement the shaders techniques of normal mapping, parallax/height mapping and model loading. </EM>
+*<br> <br> 
+*<B> Controls are as follows... </B> <br>
+*	Mouse: Camera Rotation (e.g. Move up to rotate up, etc..) <br>
+*	Scroll Wheel: Camera Zoom <br>
+*<br>
+*	W Key: Pan CameraUpwards <br>
+*	A Key: Pan Camera Left <br>
+*	S Key: Pan Camera Downwards <br>
+*	D Key: Pan Camera Right <br>
+*<br>
+*	W + Left Shift Key: Move Camera Forwards <br>
+*	S + Left Shift Key: Move Camera Backwards <br>
+*<br>
+*	P Key: Toggle Parallax Mapping On/Off <br>
+*	N Key: Toggle Normal Mapping On/Off <br>
+*<br>
+*	R Key: Reset Camera <br>
+*	Space Key: Stop Model Rotation <br>
 */
 #define GLEW_STATIC
 #include <GLEW/glew.h>
@@ -29,20 +49,21 @@ void mouse_move_callback(GLFWwindow* window, double xpos, double ypos);				//!< 
 void mouse_scroll_callback(GLFWwindow* window, double xoffset, double yoffset);		//!< Calls correlating function[s] for according scroll wheel input.
 
 //User Input Variables
-bool firstMouseMove = true;  //!< Used to initialise the mouse movement's last position if there hasn't been a last position input.
-GLfloat lastX;				 //!< The mouse/cursor's last position on screen's x-axis.
-GLfloat lastY;				 //!< The mouse/cursor's last position on screen's y-axis.
-
-//Window Loop Variables
-GLfloat deltaTime = 0.0f;	 //!< The window's current frame update.
-GLfloat lastFrame = 0.0f;	 //!< The last frame since update.
+bool firstMouseMove = true;	  //!< Used to initialise the mouse movement's last position if there hasn't been a last position input.
+GLfloat lastX;				  //!< The mouse/cursor's last position on screen's x-axis.
+GLfloat lastY;				  //!< The mouse/cursor's last position on screen's y-axis.
+							  
+//Window Loop Variables		  
+GLfloat deltaTime = 0.0f;	  //!< The window's current frame update.
+GLfloat lastFrame = 0.0f;	  //!< The last frame since update.
 
 //Shader Variables
-glm::vec3 lightSrcPosition(0.5f, 1.5f, 0.8f); //!< Position of the lights.
-bool bNormalMapping = false;  //!< Whether or not the model is being rendered with its normal map.
-bool bParallaxMapping = false;//!< Whether or not the model is being rendered with parallax mapping.
-GLfloat heightScale = 0.1f;  //!< Parallax's height mapping height.
-Model objectModel;			 //!< The model to be rendered.
+glm::vec3 lightSrcPosition(0.25f, 1.75f, 2.0f); //!< Position of the lights.
+bool bNormalMapping = true;   //!< Whether or not the model is being rendered with its normal map.
+bool bParallaxMapping = true; //!< Whether or not the model is being rendered with parallax mapping.
+bool bRotate = true;		  //!< Whether or not the model should rotate.
+GLfloat fHeightScale = 0.1f;  //!< Parallax's height mapping height.
+Model objectModel;			  //!< The model to be rendered.
 
 //! A function to utalise the other classes to render a scene of model[s] on a loop while facilitating user input.
 int main()
@@ -88,9 +109,6 @@ int main()
 	std::string modelFilePath;
 	std::getline(modelPath, modelFilePath);
 	if (!objectModel.loadModel(modelFilePath)) std::cout << "Error::could not load model from file path." << std::endl; //Check model was successfully loaded.
-
-	//GLuint diffusemap = TextureHelper::loadDDS();
-
 	//Load shaders.
 	Shader shader("resources/shaders/scene.vertex", "resources/shaders/scene.frag");
 
@@ -144,18 +162,16 @@ int main()
 		glUniformMatrix4fv(glGetUniformLocation(shader.programId, "projection"), 1, GL_FALSE, glm::value_ptr(projection)); //Set camera projection uniform.
 		glUniformMatrix4fv(glGetUniformLocation(shader.programId, "view"), 1, GL_FALSE, glm::value_ptr(view)); //Set camera view uniform.
 		
-		//Model to render.
-		glm::mat4 model;
-
-
-		model = glm::rotate(model, currentFrame, glm::normalize(glm::vec3(0.0f, 1.0f, 0.0f))); 	//Rotate the model.
+		glm::mat4 model; //Model to render.
+		if (bRotate) model = glm::rotate(model, currentFrame -2, glm::normalize(glm::vec3(0.0f, 1.0f, 0.0f))); 	//Rotate the model.
 
 		//Get and set data to the model and normal mappings' uniform locations.
 		glUniformMatrix4fv(glGetUniformLocation(shader.programId, "model"), 1, GL_FALSE, glm::value_ptr(model));
 		//glUniform1i(glGetUniformLocation(shader.programId, "bParallaxMapping"), bParallaxMapping);
 		//glUniform1f(glGetUniformLocation(shader.programId, "heightScale"), heightScale);
-		glUniform1i(glGetUniformLocation(shader.programId, "bNormalMapping"), bNormalMapping);
-
+		glUniform1i(glGetUniformLocation(shader.programId, "normalMapping"), bNormalMapping);
+		glUniform1i(glGetUniformLocation(shader.programId, "parallaxMapping"), bParallaxMapping);
+		glUniform1f(glGetUniformLocation(shader.programId, "heightScale"), fHeightScale);
 
 		//Draw the model.
 		objectModel.draw(shader);
@@ -195,6 +211,14 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 		case(GLFW_KEY_N):
 			bNormalMapping = !bNormalMapping;
 			std::cout << "Using Normal Mapping " << (bNormalMapping ? "True" : "False") << std::endl;
+			break;
+		case(GLFW_KEY_P):
+			bParallaxMapping = !bParallaxMapping;
+			std::cout << "Using Parallax Mapping " << (bParallaxMapping ? "True" : "False") << std::endl;
+			break;
+		case(GLFW_KEY_SPACE):
+			bRotate = !bRotate;
+			std::cout << "Rotating " << (bRotate ? "True" : "False") << std::endl;
 			break;
 		case(GLFW_KEY_R):
 			camera.reset();

@@ -1,11 +1,11 @@
 ﻿  application.cpp
-c:\users\crona\desktop\p2423910 - shaders assignment 2020\advancedlighting\src\core\application.cpp(239): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
-c:\users\crona\desktop\p2423910 - shaders assignment 2020\advancedlighting\src\core\application.cpp(240): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
-c:\users\crona\desktop\p2423910 - shaders assignment 2020\advancedlighting\src\core\application.cpp(245): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
-c:\users\crona\desktop\p2423910 - shaders assignment 2020\advancedlighting\src\core\application.cpp(246): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
-c:\users\crona\desktop\p2423910 - shaders assignment 2020\advancedlighting\src\core\application.cpp(249): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
-c:\users\crona\desktop\p2423910 - shaders assignment 2020\advancedlighting\src\core\application.cpp(250): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
-c:\users\crona\desktop\p2423910 - shaders assignment 2020\advancedlighting\src\core\application.cpp(264): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+c:\users\crona\desktop\p2423910 - shaders assignment 2020\advancedlighting\src\core\application.cpp(243): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
+c:\users\crona\desktop\p2423910 - shaders assignment 2020\advancedlighting\src\core\application.cpp(244): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
+c:\users\crona\desktop\p2423910 - shaders assignment 2020\advancedlighting\src\core\application.cpp(249): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
+c:\users\crona\desktop\p2423910 - shaders assignment 2020\advancedlighting\src\core\application.cpp(250): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
+c:\users\crona\desktop\p2423910 - shaders assignment 2020\advancedlighting\src\core\application.cpp(253): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
+c:\users\crona\desktop\p2423910 - shaders assignment 2020\advancedlighting\src\core\application.cpp(254): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
+c:\users\crona\desktop\p2423910 - shaders assignment 2020\advancedlighting\src\core\application.cpp(268): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
   SOIL.lib(SOIL.obj) : MSIL .netmodule or module compiled with /GL found; restarting link with /LTCG; add /LTCG to the link command line to improve linker performance
 LINK : warning LNK4075: ignoring '/INCREMENTAL' due to '/LTCG' specification
 LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library

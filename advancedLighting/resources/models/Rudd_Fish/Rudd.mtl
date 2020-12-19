@@ -13,4 +13,4 @@ illum 2
 
 map_Bump Rudd-Fish_Normalmap.png
 map_Kd Rudd-Fish_Colourmap.png
-//map_Ks Rudd-Fish_Heightmap.png
+map_Ks Rudd-Fish_Heightmap.png

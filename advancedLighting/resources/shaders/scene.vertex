@@ -42,6 +42,7 @@ void main()
 	vec3 B = normalize(normalMatrix * bitangent);
 	vec3 N = normalize(normalMatrix * normal);
 
+
 	//Use TBN matrix to inverse world co-ordinates into TBN co-ordinates.
     mat3 TBN = transpose(mat3(T, B, N));
     vs_out.TangentLightPos = TBN * lightPos;
