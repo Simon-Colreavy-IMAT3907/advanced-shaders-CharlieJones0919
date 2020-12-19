@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+    <Filter Include="Header Files\include">
+      <UniqueIdentifier>{80e40f5b-05e4-4dae-a672-5123c5ca8724}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\include\independent">
+      <UniqueIdentifier>{7dcf13f8-49f7-4765-91e9-34f874819e9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\src">
+      <UniqueIdentifier>{53eef36a-7892-4ba0-afea-3390d2d51c0d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\src\core">
+      <UniqueIdentifier>{cadd310f-938a-4d46-8e13-f89a261393db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\src\independent">
+      <UniqueIdentifier>{08b6b870-c684-4389-abec-7a85837064ab}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\independent\camera.h">
+      <Filter>Header Files\include\independent</Filter>
+    </ClInclude>
+    <ClInclude Include="include\independent\mesh.h">
+      <Filter>Header Files\include\independent</Filter>
+    </ClInclude>
+    <ClInclude Include="include\independent\model.h">
+      <Filter>Header Files\include\independent</Filter>
+    </ClInclude>
+    <ClInclude Include="include\independent\shader.h">
+      <Filter>Header Files\include\independent</Filter>
+    </ClInclude>
+    <ClInclude Include="include\independent\texture.h">
+      <Filter>Header Files\include\independent</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\core\application.cpp">
+      <Filter>Source Files\src\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\independent\camera.cpp">
+      <Filter>Source Files\src\independent</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
