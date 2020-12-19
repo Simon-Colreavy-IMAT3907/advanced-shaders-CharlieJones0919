@@ -193,7 +193,6 @@ public:
 			//Constrain Non-Power-Of-Two textures. 
 			if (width < 1) width = 1;
 			if (height < 1) height = 1;
-
 		}
 
 		delete[] buffer;

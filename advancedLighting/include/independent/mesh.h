@@ -165,7 +165,7 @@ public:
 	int bindTextures(const Shader& shader) const
 	{
 		//Temporary variables to store the texture values in.
-		int diffuseCnt = 0, specularCnt = 0, texUnitCnt = 0,normalCnt = 0;
+		int diffuseCnt = 0, specularCnt = 0, texUnitCnt = 0, normalCnt = 0;
 		
 		//For all the added textures, add their data to their shader uniforms.
 		for (std::vector<Texture>::const_iterator it = this->textures.begin(); this->textures.end() != it; ++it)
@@ -199,6 +199,15 @@ public:
 					glUniform1i(glGetUniformLocation(shader.programId, samplerNameStr.str().c_str()), texUnitCnt++);
 				}
 				break;
+				/*case aiTextureType_HEIGHT:
+				{
+					glActiveTexture(GL_TEXTURE0 + texUnitCnt);
+					glBindTexture(GL_TEXTURE_2D, it->id);
+					std::stringstream samplerNameStr;
+					samplerNameStr << "texture_height" << normalCnt++;
+					glUniform1i(glGetUniformLocation(shader.programId, samplerNameStr.str().c_str()), texUnitCnt++);
+				}
+				break;*/
 			default:
 				std::cerr << "Warning::Mesh::draw, texture type" << it->type
 					<< " current not supported." << std::endl;

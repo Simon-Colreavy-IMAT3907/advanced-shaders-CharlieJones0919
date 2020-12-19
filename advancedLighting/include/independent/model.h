@@ -89,6 +89,14 @@ private:
 				vertex.position.z = meshPtr->mVertices[i].z;
 			}
 
+			//Get normals from mesh.
+			if (meshPtr->HasNormals())
+			{
+				vertex.normal.x = meshPtr->mNormals[i].x;
+				vertex.normal.y = meshPtr->mNormals[i].y;
+				vertex.normal.z = meshPtr->mNormals[i].z;
+			}
+
 			//Get texture positions from mesh.
 			if (meshPtr->HasTextureCoords(0))
 			{
@@ -100,15 +108,8 @@ private:
 				vertex.texCoords = glm::vec2(0.0f, 0.0f);
 			}
 
-			//Get normals from mesh.
-			if (meshPtr->HasNormals())
-			{
-				vertex.normal.x = meshPtr->mNormals[i].x;
-				vertex.normal.y = meshPtr->mNormals[i].y;
-				vertex.normal.z = meshPtr->mNormals[i].z;
-			}
-
-			//Get tangents from mesh.
+		
+			//Get tangents and bitangents from mesh.
 			if (meshPtr->HasTangentsAndBitangents())
 			{
 				glm::vec3 tangent;
@@ -155,6 +156,11 @@ private:
 			std::vector<Texture> normalTexture;
 			this->processMaterial(materialPtr, sceneObjPtr, aiTextureType_HEIGHT, normalTexture);
 			textures.insert(textures.end(), normalTexture.begin(), normalTexture.end());
+	
+		//	//Get texture height map data.
+		//	std::vector<Texture> heightTexture;
+		//	this->processMaterial(materialPtr, sceneObjPtr, aiTextureType_HEIGHT, heightTexture);
+		//	textures.insert(textures.end(), heightTexture.begin(), heightTexture.end());
 		}
 
 		//Set the retrieved data to the specified mesh object.

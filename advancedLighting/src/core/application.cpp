@@ -39,7 +39,9 @@ GLfloat lastFrame = 0.0f;	 //!< The last frame since update.
 
 //Shader Variables
 glm::vec3 lightSrcPosition(0.5f, 1.5f, 0.8f); //!< Position of the lights.
-bool bNormalMapping = true;  //!< Stores whether or not the model is being rendered with its normal map.
+bool bNormalMapping = false;  //!< Whether or not the model is being rendered with its normal map.
+bool bParallaxMapping = false;//!< Whether or not the model is being rendered with parallax mapping.
+GLfloat heightScale = 0.1f;  //!< Parallax's height mapping height.
 Model objectModel;			 //!< The model to be rendered.
 
 //! A function to utalise the other classes to render a scene of model[s] on a loop while facilitating user input.
@@ -86,6 +88,8 @@ int main()
 	std::string modelFilePath;
 	std::getline(modelPath, modelFilePath);
 	if (!objectModel.loadModel(modelFilePath)) std::cout << "Error::could not load model from file path." << std::endl; //Check model was successfully loaded.
+
+	//GLuint diffusemap = TextureHelper::loadDDS();
 
 	//Load shaders.
 	Shader shader("resources/shaders/scene.vertex", "resources/shaders/scene.frag");
@@ -142,11 +146,16 @@ int main()
 		
 		//Model to render.
 		glm::mat4 model;
+
+
 		model = glm::rotate(model, currentFrame, glm::normalize(glm::vec3(0.0f, 1.0f, 0.0f))); 	//Rotate the model.
 
 		//Get and set data to the model and normal mappings' uniform locations.
 		glUniformMatrix4fv(glGetUniformLocation(shader.programId, "model"), 1, GL_FALSE, glm::value_ptr(model));
-		glUniform1i(glGetUniformLocation(shader.programId, "normalMapping"), bNormalMapping);
+		//glUniform1i(glGetUniformLocation(shader.programId, "bParallaxMapping"), bParallaxMapping);
+		//glUniform1f(glGetUniformLocation(shader.programId, "heightScale"), heightScale);
+		glUniform1i(glGetUniformLocation(shader.programId, "bNormalMapping"), bNormalMapping);
+
 
 		//Draw the model.
 		objectModel.draw(shader);
