@@ -24,7 +24,8 @@ Controls are as follows...
 
 # OpenGL Resources Referenced/Used:
 - [www.learnopengl.com](http://www.learnopengl.com)
-- [Joey de Vries](http://joeydevries.com/#home)
+- [Joey de Vries Webpage](http://joeydevries.com/#home)
+- [Joey de Vries GitHub Repo](https://github.com/JoeyDeVries/LearnOpenGL/blob/master/README.md)
 - [Rudd Fish Model](https://www.turbosquid.com/3d-models/free-obj-model-fish-rudd/603242)
 
 - [enviornment mapping demo](https://github.com/wangdingqiao/noteForOpenGL/blob/master/environmentMapping/reflection-sphere.png)
