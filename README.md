@@ -1,24 +1,24 @@
 
-This program is an attempt to implement the shaders techniques of normal mapping, parallax/height mapping and model loading.
-
-Controls are as follows...
-Mouse: Camera Rotation (e.g. Move up to rotate up, etc..)
-Scroll Wheel: Camera Zoom
-
-W Key: Pan CameraUpwards
-A Key: Pan Camera Left
-S Key: Pan Camera Downwards
-D Key: Pan Camera Right
-
-W + Left Shift Key: Move Camera Forwards
-S + Left Shift Key: Move Camera Backwards
-
-P Key: Toggle Parallax Mapping On/Off
-N Key: Toggle Normal Mapping On/Off
-
-R Key: Reset Camera
-Space Key: Stop Model Rotation 
-
+This program is an attempt to implement the shaders techniques of normal mapping, parallax/height mapping and model loading. <BR>
+<BR>
+Controls are as follows... <BR>
+Mouse: Camera Rotation (e.g. Move up to rotate up, etc..) <BR>
+Scroll Wheel: Camera Zoom <BR>
+<BR>
+W Key: Pan CameraUpwards <BR>
+A Key: Pan Camera Left <BR>
+S Key: Pan Camera Downwards <BR>
+D Key: Pan Camera Right <BR>
+<BR>
+W + Left Shift Key: Move Camera Forwards <BR>
+S + Left Shift Key: Move Camera Backwards <BR>
+<BR>
+P Key: Toggle Parallax Mapping On/Off <BR>
+N Key: Toggle Normal Mapping On/Off <BR>
+<BR>
+R Key: Reset Camera <BR>
+Space Key: Stop Model Rotation <BR>
+<BR>
 ----------------------------------------------------
 
 # OpenGL Resources Referenced/Used:
