@@ -160,15 +160,13 @@ int main()
 		glUniform3f(lightPosLoc, lightSrcPosition.x, lightSrcPosition.y, lightSrcPosition.z); //Set light position uniform.
 		//Get and set data to camera projection and views' uniform locations.
 		glUniformMatrix4fv(glGetUniformLocation(shader.programId, "projection"), 1, GL_FALSE, glm::value_ptr(projection)); //Set camera projection uniform.
-		glUniformMatrix4fv(glGetUniformLocation(shader.programId, "view"), 1, GL_FALSE, glm::value_ptr(view)); //Set camera view uniform.
+		glUniformMatrix4fv(glGetUniformLocation(shader.programId, "view"), 1, GL_FALSE, glm::value_ptr(view));			   //Set camera view uniform.
 		
-		glm::mat4 model; //Model to render.
-		if (bRotate) model = glm::rotate(model, currentFrame -2, glm::normalize(glm::vec3(0.0f, 1.0f, 0.0f))); 	//Rotate the model.
+		glm::mat4 model; //Rotation to apply to model mesh.
+		if (bRotate) model = glm::rotate(model, currentFrame -2, glm::normalize(glm::vec3(0.0f, 1.0f, 0.0f))); //Rotate the model.
 
-		//Get and set data to the model and normal mappings' uniform locations.
+		//Get and set user input data to the model and normal/parallax mappings' uniform locations.
 		glUniformMatrix4fv(glGetUniformLocation(shader.programId, "model"), 1, GL_FALSE, glm::value_ptr(model));
-		//glUniform1i(glGetUniformLocation(shader.programId, "bParallaxMapping"), bParallaxMapping);
-		//glUniform1f(glGetUniformLocation(shader.programId, "heightScale"), heightScale);
 		glUniform1i(glGetUniformLocation(shader.programId, "normalMapping"), bNormalMapping);
 		glUniform1i(glGetUniformLocation(shader.programId, "parallaxMapping"), bParallaxMapping);
 		glUniform1f(glGetUniformLocation(shader.programId, "heightScale"), fHeightScale);
