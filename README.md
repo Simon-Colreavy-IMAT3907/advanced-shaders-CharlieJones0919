@@ -1,5 +1,6 @@
 
 This program is an attempt to implement the shaders techniques of normal mapping, parallax/height mapping and model loading. <br>
+Run from SLN file.
 <br>
 Controls are as follows... 
 - Mouse: Camera Rotation (e.g. Move up to rotate up, etc..) 
