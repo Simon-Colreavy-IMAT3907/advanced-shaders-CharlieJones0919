@@ -33,7 +33,6 @@ Controls are as follows...
 - [normal mapping demo](https://github.com/wangdingqiao/noteForOpenGL/blob/master/advancedLighting/normalMapping/compare-model.png)
 - [frame rate counter Demo](https://github.com/wangdingqiao/noteForOpenGL/blob/master/textRendering/fps.png)
 - [Pixel Buffer Object pack and unpack demo](https://github.com/wangdingqiao/noteForOpenGL/blob/master/PBO/PBO-unpack/PBO-2.png)
-- [Video rendering with PBO using OpenCV](https://github.com/wangdingqiao/noteForOpenGL/blob/master/videoRendering/render-video.png)
 
 ----------------------------------------------------
 
