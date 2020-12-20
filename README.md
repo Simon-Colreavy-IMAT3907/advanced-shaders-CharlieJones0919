@@ -24,11 +24,10 @@ Controls are as follows...
 
 # OpenGL Resources Referenced/Used:
 - [www.learnopengl.com](http://www.learnopengl.com)
-- [Joey de Vries Webpage](http://joeydevries.com/#home)
 - [Joey de Vries GitHub Repo](https://github.com/JoeyDeVries/LearnOpenGL/blob/master/README.md)
 - [Rudd Fish Model](https://www.turbosquid.com/3d-models/free-obj-model-fish-rudd/603242)
 
-- [enviornment mapping demo](https://github.com/wangdingqiao/noteForOpenGL/blob/master/environmentMapping/reflection-sphere.png)
+- [environment mapping demo](https://github.com/wangdingqiao/noteForOpenGL/blob/master/environmentMapping/reflection-sphere.png)
 - [reflection map demo](https://github.com/wangdingqiao/noteForOpenGL/blob/master/environmentMapping/reflectionMap-combine.png)
 - [skyBox demo](https://github.com/wangdingqiao/noteForOpenGL/blob/master/skyBox/skybox2.png)
 - [normal mapping demo](https://github.com/wangdingqiao/noteForOpenGL/blob/master/advancedLighting/normalMapping/compare-model.png)
